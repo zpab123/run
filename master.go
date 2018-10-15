@@ -4,7 +4,7 @@
 package main
 
 import (
-	"scorpio"
+	"github.com/zpab123/scorpio"
 
 	"go.uber.org/zap"
 )
