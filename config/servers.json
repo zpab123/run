@@ -25,23 +25,23 @@
   "production": {
 	"gate":
 	[
-		{"name": "gate-server-1", "host": "", "port": 0, "frontend": true, "clientHost": "127.0.0.1", "clientPort": 3014}
+		{"name": "gate-server-1", "host": "", "port": 0, "frontend": true, "clientHost": "192.168.1.222", "clientPort": 3014}
     ],
 	
 	"connector":
 	[
-		{"name": "connector-server-1", "host": "127.0.0.1", "port": 4050, "frontend": true, "clientHost": "127.0.0.1", "clientPort": 3050},
-		{"name": "connector-server-2", "host": "127.0.0.1", "port": 4051, "frontend": true, "clientHost": "127.0.0.1", "clientPort": 3051}
+		{"name": "connector-server-1", "host": "192.168.1.222", "port": 4050, "frontend": true, "clientHost": "192.168.1.222", "clientPort": 3050},
+		{"name": "connector-server-2", "host": "192.168.1.222", "port": 4051, "frontend": true, "clientHost": "192.168.1.222", "clientPort": 3051}
 	],
 	
 	"auth":
 	[
-		{"name": "auth-server-1", "host": "127.0.0.1", "port": 4150, "frontend": false, "clientHost": "", "clientPort": 0}
+		{"name": "auth-server-1", "host": "192.168.1.222", "port": 4150, "frontend": false, "clientHost": "", "clientPort": 0}
 	],
 	
 	"area":
 	[
-		{"name": "area-server-1", "host": "127.0.0.1", "port": 4250, "frontend": false, "clientHost": "", "clientPort": 0}
+		{"name": "area-server-1", "host": "192.168.1.222", "port": 4250, "frontend": false, "clientHost": "", "clientPort": 0}
 	]
   }
 }
