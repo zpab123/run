@@ -7,7 +7,7 @@
 	
 	"connector":
 	[
-		{"name": "connector-server-1", "frontend": true, "host": "127.0.0.1", "port": 3100, "clientHost": "127.0.0.1", "cTcpPort": 9100, "cWsPort":9110}
+		{"name": "connector-server-1", "frontend": true, "host": "127.0.0.1", "port": 3100, "clientHost": "127.0.0.1", "cTcpPort": 9100, "cWsPort":9110},
 		{"name": "connector-server-2", "frontend": true, "host": "127.0.0.1", "port": 3101, "clientHost": "127.0.0.1", "cTcpPort": 9101, "cWsPort":9111}
 	],
 	
@@ -30,7 +30,7 @@
 	
 	"connector":
 	[
-		{"name": "connector-server-1", "frontend": true, "host": "192.168.1.222", "port": 3100, "clientHost": "127.0.0.1", "cTcpPort": 9100, "cWsPort":9110}
+		{"name": "connector-server-1", "frontend": true, "host": "192.168.1.222", "port": 3100, "clientHost": "127.0.0.1", "cTcpPort": 9100, "cWsPort":9110},
 		{"name": "connector-server-2", "frontend": true, "host": "192.168.1.222", "port": 3101, "clientHost": "127.0.0.1", "cTcpPort": 9101, "cWsPort":9111}
 	],
 	
