@@ -1,0 +1,16 @@
+{
+  "log_level": "TRACE",
+  "encrypt": "7TnJPB4lKtjEcCWWjN6jSA==",
+  "service": {
+    "name": "web4",
+    "tags": ["master"],
+    "address": "127.0.0.1",
+    "port": 8500,
+    "checks": [
+      {
+        "http": "http://127.0.0.1:8500/healthcheck",
+        "interval": "10s"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+一、公司
+
+不带UI
+consul agent -server -bootstrap-expect 2 -data-dir F:\goproject\src\run\consuldata -node=n1 -bind=127.0.0.1
+
+带UI
+consul agent -server -bootstrap-expect 1 -data-dir ./consuldata -node=n1 -bind=127.0.0.1 -ui-dir ./consului 
+
+
+
+启动参数 说明
+
+consul agent -server -bootstrap-expect 1 -
+data-dir /tmp/consul -node=s1 -bind=10.201.102.198 -ui-dir ./consul_ui/ -
+rejoin -config-dir=/etc/consul.d/ -client 0.0.0.0
+
+
