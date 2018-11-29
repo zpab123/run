@@ -1,0 +1,3 @@
+Ò»¡¢¹«Ë¾
+
+consul agent -server -bootstrap-expect 2 -data-dir F:\goproject\src\run\consuldata -node=n1 -bind=127.0.0.1
