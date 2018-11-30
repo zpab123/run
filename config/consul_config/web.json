@@ -1,3 +1,9 @@
 {
-	"service": {"name": "web", "tags": ["rails"], "port": 80}
+    "service": {
+        "name": "web",
+        "tags": [
+            "rails"
+        ],
+        "port": 80
+    }
 }

@@ -10,7 +10,7 @@ consul agent -server -bootstrap-expect 1 -data-dir ./consuldata -node=n1 -bind=1
 
 启动参数 说明
 
-consul agent -server -bootstrap-expect 1 -data-dir ./consul_data -ui-dir ./consul_ui -config-dir=./config/consul_config -client 0.0.0.0 -rejoin -node=s1 -bind=127.0.0.1
+consul agent -server -bootstrap-expect 1 -rejoin -data-dir ./consul_data -ui-dir ./consul_ui -config-dir=./config/consul_config -client 0.0.0.0 -node=s1 -bind=127.0.0.1
 
 
 -server ： 定义agent运行在server模式
