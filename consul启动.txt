@@ -1,16 +1,10 @@
-一、公司
+一、启动参数 说明
 
-不带UI
-consul agent -server -bootstrap-expect 2 -data-dir F:\goproject\src\run\consuldata -node=n1 -bind=127.0.0.1
-
-带UI
-consul agent -server -bootstrap-expect 1 -data-dir ./consuldata -node=n1 -bind=127.0.0.1 -ui-dir ./consului 
-
-
-
-启动参数 说明
+1、启动 Consul  server
 
 consul agent -server -bootstrap-expect 1 -rejoin -data-dir ./consul_data -ui-dir ./consul_ui -config-dir=./config/consul_config -client 0.0.0.0 -node=s1 -bind=127.0.0.1
+
+2、启动 Consul Client
 
 
 -server ： 定义agent运行在server模式

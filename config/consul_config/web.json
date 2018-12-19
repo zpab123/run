@@ -1,9 +1,15 @@
 {
-    "service": {
-        "name": "web",
-        "tags": [
-            "rails"
-        ],
-        "port": 80
-    }
+	"service": {
+		"name": "web",
+		"tags": ["extract", "verify", "compare", "idcard"],
+		"address": "10.201.102.199",
+		"port": 9000,
+		"check": {
+			"id": "api",
+			"name": "HTTP API on port 9000",
+			"http": "www.baidu.com",
+			"interval": "10s",
+			"timeout": "1s"
+		}
+	}
 }
