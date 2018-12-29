@@ -11,7 +11,7 @@ import (
 func main() {
 	// 创建 app
 	app := world.CreateApp()
-	app.SetName("gate")
+	app.SetType("gate")
 
 	// 运行 app
 	app.Run()
