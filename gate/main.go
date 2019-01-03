@@ -10,8 +10,7 @@ import (
 // 主入口
 func main() {
 	// 创建 app
-	app := world.CreateApp()
-	app.SetType("gate")
+	app := world.CreateApp("gate")
 
 	// 运行 app
 	app.Run()
