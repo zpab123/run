@@ -1,10 +1,12 @@
 package routers
 
 import (
-	"appweb/controllers"
+	"run/appweb/controllers"
+
 	"github.com/astaxie/beego"
 )
 
 func init() {
-    beego.Router("/", &controllers.MainController{})
+	beego.Router("/", &controllers.MainController{})
+	beego.Router("/appurl", &controllers.AppUrl{})
 }
