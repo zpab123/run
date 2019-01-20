@@ -8,7 +8,17 @@ import (
 )
 
 type AppDelegate struct {
-	clientPacketQueue chan interface{} // 客户端消息队列
+	//clientPacketQueue chan struct{} // 客户端消息队列
+}
+
+func NewAppDelegate() *AppDelegate {
+	//que := make(struct{}, 10000)
+
+	ad := &AppDelegate{
+		//clientPacketQueue: que,
+	}
+
+	return ad
 }
 
 // 客户端消息
@@ -25,8 +35,8 @@ func (this *AppDelegate) OnServerMsg(ses model.ISession, msg interface{}) {
 func (this *AppDelegate) run() {
 	for {
 		select {
-		case item := <-clientPacketQueue:
-			//处理客户端消息
+		//case item := <-clientPacketQueue:
+		//处理客户端消息
 		}
 	}
 }

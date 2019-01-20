@@ -10,10 +10,10 @@ import (
 // 主入口
 func main() {
 	// 创建代理
-	ad := &AppDelegate{}
+	ad := NewAppDelegate()
 
 	// 创建 app
-	app := world.CreateApp("gate")
+	app := world.CreateApp("gate", ad)
 
 	// 运行 app
 	app.Run()
