@@ -1,7 +1,7 @@
 // /////////////////////////////////////////////////////////////////////////////
 // 读取配置文件
 
-package main
+package config
 
 import (
 	"os"
@@ -19,10 +19,10 @@ var (
 	mainPath      string              // 程序启动目录
 	iniFilePath   = "/conf/conf.conf" // conf.conf 默认路径
 	iniAbsPath    string              // conf.conf 绝对路径
-	iniconf       config.Configer     // conf.conf 配置文件
-	whiteCountry  = make([]string, 0) // 国家白名单
-	whiteTimeutc  = make([]string, 0) // 时区白名单
-	whiteLanguage = make([]string, 0) // 语言白名单
+	Iniconf       config.Configer     // conf.conf 配置文件
+	WhiteCountry  = make([]string, 0) // 国家白名单
+	WhiteTimeutc  = make([]string, 0) // 时区白名单
+	WhiteLanguage = make([]string, 0) // 语言白名单
 )
 
 // 初始化
@@ -68,7 +68,7 @@ type BlackConf struct {
 // 读取配置文件
 func readConfIni() {
 	var err error // 错误变量
-	iniconf, err = config.NewConfig("ini", iniAbsPath)
+	Iniconf, err = config.NewConfig("ini", iniAbsPath)
 	if err != nil {
 		logs.Error("conf.conf 配置文件读取错误。err=", err)
 	}
@@ -88,56 +88,50 @@ func getMainPath() string {
 // 设置国家白名单
 func setWhiteCountry() {
 	// 获取字符串
-	countryString := iniconf.String("white::country")
+	countryString := Iniconf.String("white::country")
 	if "" == countryString {
 		return
 	}
 
 	// 分割字符串
-	whiteCountry = strings.Split(countryString, ",")
+	WhiteCountry = strings.Split(countryString, ",")
 
 	// 打印信息
-	if false {
-		for _, coun := range whiteCountry {
-			logs.Info(coun)
-		}
+	for _, coun := range WhiteCountry {
+		logs.Info(coun)
 	}
 }
 
 // 设置时区白名单
 func setWhiteTimeUtc() {
 	// 获取字符串
-	timeString := iniconf.String("white::timeutc")
+	timeString := Iniconf.String("white::timeutc")
 	if "" == timeString {
 		return
 	}
 
 	// 分割字符串
-	whiteTimeutc = strings.Split(timeString, ",")
+	WhiteTimeutc = strings.Split(timeString, ",")
 
 	// 打印信息
-	if false {
-		for _, utc := range whiteTimeutc {
-			logs.Info(utc)
-		}
+	for _, utc := range WhiteTimeutc {
+		logs.Info(utc)
 	}
 }
 
 // 设置语言白名单
 func setWhiteLanguage() {
 	// 获取字符串
-	language := iniconf.String("white::language")
+	language := Iniconf.String("white::language")
 	if "" == language {
 		return
 	}
 
 	// 分割字符串
-	whiteLanguage = strings.Split(language, ",")
+	WhiteLanguage = strings.Split(language, ",")
 
 	// 打印信息
-	if false {
-		for _, language := range whiteLanguage {
-			logs.Info(language)
-		}
+	for _, language := range WhiteLanguage {
+		logs.Info(language)
 	}
 }
