@@ -98,7 +98,7 @@ func setWhiteCountry() {
 
 	// 打印信息
 	for _, coun := range WhiteCountry {
-		logs.Info(coun)
+		logs.Debug(coun)
 	}
 }
 
@@ -115,7 +115,7 @@ func setWhiteTimeUtc() {
 
 	// 打印信息
 	for _, utc := range WhiteTimeutc {
-		logs.Info(utc)
+		logs.Debug(utc)
 	}
 }
 
@@ -132,6 +132,6 @@ func setWhiteLanguage() {
 
 	// 打印信息
 	for _, language := range WhiteLanguage {
-		logs.Info(language)
+		logs.Debug(language)
 	}
 }

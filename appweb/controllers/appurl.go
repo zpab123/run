@@ -47,6 +47,7 @@ func (this *AppUrl) reply() {
 	// 名字不存在
 	if "" == this.appName {
 		this.Ctx.WriteString("0")
+		return
 	}
 
 	// 参数检查
