@@ -17,7 +17,4 @@ func main() {
 
 	// 运行 app
 	app.Run()
-
-	// 主循环
-	ad.run()
 }
