@@ -1,0 +1,15 @@
+// /////////////////////////////////////////////////////////////////////////////
+// scene 服务器
+
+package main
+
+import (
+	"github.com/zpab123/world" // world 库
+)
+
+// 主入口
+func main() {
+
+	// 启动场景服务器
+	world.RunScene()
+}
