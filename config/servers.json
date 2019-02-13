@@ -4,19 +4,7 @@
 	[
 		{"name": "gate-server-1", "frontend": true, "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010}
     ],
-	
-	"connector":
-	[
-		{"name": "connector-server-1", "frontend": true, "host": "127.0.0.1", "port": 3100, "clientHost": "127.0.0.1", "cTcpPort": 9100, "cWsPort":9110},
-		{"name": "connector-server-2", "frontend": true, "host": "127.0.0.1", "port": 3101, "clientHost": "127.0.0.1", "cTcpPort": 9101, "cWsPort":9111}
-	],
-	
-	"auth":
-	[
-		{"name": "auth-server-1", "frontend": false, "host": "127.0.0.1", "port": 3200, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
-	],
-	
-	"area":
+	"scene":
 	[
 		{"name": "area-server-1", "frontend": false, "host": "127.0.0.1", "port": 3300, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
 	]
@@ -27,21 +15,9 @@
 	[
 		{"name": "gate-server-1", "frontend": true, "host": "127.0.0.1", "port": 3000, "clientHost": "192.168.1.222", "cTcpPort": 9000, "cWsPort":9010}
     ],
-	
-	"connector":
+	"scene":
 	[
-		{"name": "connector-server-1", "frontend": true, "host": "127.0.0.1", "port": 3100, "clientHost": "127.0.0.1", "cTcpPort": 9100, "cWsPort":9110},
-		{"name": "connector-server-2", "frontend": true, "host": "127.0.0.1", "port": 3101, "clientHost": "127.0.0.1", "cTcpPort": 9101, "cWsPort":9111}
-	],
-	
-	"auth":
-	[
-		{"name": "auth-server-1", "frontend": false, "host": "127.0.0.1", "port": 3200, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
-	],
-	
-	"area":
-	[
-		{"name": "area-server-1", "frontend": false, "host": "127.0.0.1", "port": 3300, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
+		{"name": "scene1", "frontend": false, "host": "127.0.0.1", "port": 3300, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
 	]
   }
 }
