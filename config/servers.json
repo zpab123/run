@@ -6,7 +6,7 @@
     ],
 	"scene":
 	[
-		{"name": "area-server-1", "frontend": false, "host": "127.0.0.1", "port": 3300, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
+		{"name": "scene1", "frontend": false, "host": "127.0.0.1", "port": 3300, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
 	]
   },
 

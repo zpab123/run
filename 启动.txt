@@ -1,3 +1,7 @@
 gate
 
 gate.exe -name gate-server-1
+
+scene
+
+scene.exe -name scene1
