@@ -37,8 +37,13 @@ func (this *AppDelegate) Run() {
 	}
 }
 
-// session 消息管理
-func (this *AppDelegate) OnNewMessage(ses *session.FrontendSession, msg *session.Message) {
+// 收到1个新的客户端消息
+func (this *AppDelegate) OnClientMessage(ses *session.FrontendSession, msg *session.Message) {
 	// 加入客户端消息队列
 	this.clientPacketQueue <- msg
+}
+
+// 收到1个新的服务器消息
+func (this *AppDelegate) OnServerMessage(ses *session.BackendSession, msg *session.Message) {
+
 }
