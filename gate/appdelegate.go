@@ -33,10 +33,10 @@ func (this *AppDelegate) Run() {
 		select {
 		case msg := <-this.clientPacketQueue:
 			// 处理客户端消息
-			zaplog.Debugf(msg.GetPacket().GetId())
+			zaplog.Debugf("%d", msg.GetPacket().GetId())
 		case msg := <-this.serverPacketQueue:
 			//
-			zaplog.Debugf(msg.GetPacket().GetId())
+			zaplog.Debugf("%d", msg.GetPacket().GetId())
 		default:
 		}
 	}
