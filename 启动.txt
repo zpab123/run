@@ -2,9 +2,7 @@ dispatcher
 	dispatcher.exe -name dispatcher_1
 
 gate
-
-gate.exe -name gate_1
+	gate.exe -name gate_1
 
 scene
-
-scene.exe -name scene1
+	scene.exe -name scene1
