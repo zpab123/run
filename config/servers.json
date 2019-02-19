@@ -2,22 +2,32 @@
   "development": {
 	"gate":
 	[
-		{"name": "gate-server-1", "frontend": true, "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010}
+		{"name": "gate_1", "frontend": true, "host": "127.0.0.1", "port": 3100, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010}
+    ],
+	"dispatcher":
+	[
+		{"name": "dispatcher_1", "frontend": false, "host": "127.0.0.1", "port": 3000, "clientHost": "", "cTcpPort": 0, "cWsPort":0},
+		{"name": "dispatcher_2", "frontend": false, "host": "127.0.0.1", "port": 3001, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
     ],
 	"scene":
 	[
-		{"name": "scene1", "frontend": false, "host": "127.0.0.1", "port": 3300, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
+		{"name": "scene1", "frontend": false, "host": "127.0.0.1", "port": 3200, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
 	]
   },
 
   "production": {
 	"gate":
 	[
-		{"name": "gate-server-1", "frontend": true, "host": "127.0.0.1", "port": 3000, "clientHost": "192.168.1.222", "cTcpPort": 9000, "cWsPort":9010}
+		{"name": "gate_1", "frontend": true, "host": "127.0.0.1", "port": 3100, "clientHost": "192.168.1.222", "cTcpPort": 9000, "cWsPort":9010}
+    ],
+	"dispatcher":
+	[
+		{"name": "dispatcher_1", "frontend": false, "host": "127.0.0.1", "port": 3000, "clientHost": "", "cTcpPort": 0, "cWsPort":0},
+		{"name": "dispatcher_2", "frontend": false, "host": "127.0.0.1", "port": 3001, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
     ],
 	"scene":
 	[
-		{"name": "scene1", "frontend": false, "host": "127.0.0.1", "port": 3300, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
+		{"name": "scene1", "frontend": false, "host": "127.0.0.1", "port": 3200, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
 	]
   }
 }
