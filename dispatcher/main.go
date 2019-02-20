@@ -15,8 +15,6 @@ func main() {
 	// 创建 app
 	app := world.CreateApp("dispatcher", ad)
 
-	app.GetComponentMgr().SetConnectorOpt(nil)
-
 	// 运行 app
 	app.Run()
 }
