@@ -4,6 +4,7 @@
 package main
 
 import (
+	"github.com/zpab123/world/app"     // app 服务器
 	"github.com/zpab123/world/session" // session
 	"github.com/zpab123/zaplog"        // log 库
 )
@@ -27,8 +28,18 @@ func NewAppDelegate() *AppDelegate {
 	return ad
 }
 
-// 运行 AppDelegate
-func (this *AppDelegate) Run() {
+// app 创建成功
+func (this *AppDelegate) OnCreat(app *app.Application) {
+
+}
+
+// app 初始化成功
+func (this *AppDelegate) OnInit(app *app.Application) {
+
+}
+
+// app 开始运行
+func (this *AppDelegate) OnRun(app *app.Application) {
 	for {
 		select {
 		case msg := <-this.clientPacketQueue:
@@ -40,6 +51,11 @@ func (this *AppDelegate) Run() {
 		default:
 		}
 	}
+}
+
+// app 停止运行
+func (this *AppDelegate) OnStop(app *app.Application) {
+
 }
 
 // 收到1个新的客户端消息

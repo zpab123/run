@@ -4,7 +4,7 @@
 package main
 
 import (
-	"github.com/zpab123/world/app"     // app 库
+	"github.com/zpab123/world/app"     // app 服务器
 	"github.com/zpab123/world/network" // 网络库
 	"github.com/zpab123/world/session" // session
 	"github.com/zpab123/zaplog"        // log 库
@@ -37,10 +37,16 @@ func (this *AppDelegate) OnCreat(app *app.Application) {
 // app 初始化成功
 func (this *AppDelegate) OnInit(app *app.Application) {
 	// connector 组件参数
-	opt := app.GetComponentMgr().GetConnectorOpt()
-	if nil != opt {
-		opt.Frontend = false
-		opt.AcceptorType = network.C_ACCEPTOR_TYPE_TCP
+	connectorOpt := app.GetComponentMgr().GetConnectorOpt()
+	if nil != connectorOpt {
+		connectorOpt.Frontend = false
+		connectorOpt.AcceptorType = network.C_ACCEPTOR_TYPE_TCP
+	}
+
+	// DispatcherClient 组件
+	disClientOpt := app.GetComponentMgr().GetDisClientOpt()
+	if nil != disClientOpt {
+		disClientOpt.Enable = false
 	}
 }
 
