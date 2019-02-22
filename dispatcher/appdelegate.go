@@ -6,7 +6,7 @@ package main
 import (
 	"github.com/zpab123/world/app"     // app 服务器
 	"github.com/zpab123/world/network" // 网络库
-	"github.com/zpab123/world/session" // session
+	"github.com/zpab123/world/session" // 会话库
 	"github.com/zpab123/zaplog"        // log 库
 )
 
@@ -14,16 +14,16 @@ import (
 // AppDelegate 对象
 
 type AppDelegate struct {
-	clientPacketQueue chan *session.Message // 客户端消息队列
-	serverPacketQueue chan *session.Message // 服务器消息队列
+	clientPacketQueue chan *network.Packet // 客户端消息队列
+	serverPacketQueue chan *network.Packet // 服务器消息队列
 }
 
 // 新建1个 AppDelegate
 func NewAppDelegate() *AppDelegate {
 	// 创建
 	ad := &AppDelegate{
-		clientPacketQueue: make(chan *session.Message, 10000),
-		serverPacketQueue: make(chan *session.Message, 10000),
+		clientPacketQueue: make(chan *network.Packet, 10000),
+		serverPacketQueue: make(chan *network.Packet, 10000),
 	}
 
 	return ad
@@ -54,12 +54,12 @@ func (this *AppDelegate) OnInit(app *app.Application) {
 func (this *AppDelegate) OnRun(app *app.Application) {
 	for {
 		select {
-		case msg := <-this.clientPacketQueue:
+		case pkt := <-this.clientPacketQueue:
 			// 处理客户端消息
-			zaplog.Debugf("%d", msg.GetPacket().GetId())
-		case msg := <-this.serverPacketQueue:
+			zaplog.Debugf("%d", pkt.GetId())
+		case pkt := <-this.serverPacketQueue:
 			//
-			zaplog.Debugf("%d", msg.GetPacket().GetId())
+			zaplog.Debugf("%d", pkt.GetId())
 		default:
 		}
 	}
@@ -71,14 +71,14 @@ func (this *AppDelegate) OnStop(app *app.Application) {
 }
 
 // 收到1个新的客户端消息
-func (this *AppDelegate) OnClientMessage(ses *session.FrontendSession, msg *session.Message) {
+func (this *AppDelegate) OnClientMessage(ses *session.FrontendSession, packet *network.Packet) {
 	// 加入客户端消息队列
-	this.clientPacketQueue <- msg
+	this.clientPacketQueue <- packet
 }
 
 // 收到1个新的服务器消息
-func (this *AppDelegate) OnServerMessage(ses *session.BackendSession, msg *session.Message) {
-	this.serverPacketQueue <- msg
+func (this *AppDelegate) OnServerMessage(ses *session.BackendSession, packet *network.Packet) {
+	this.serverPacketQueue <- packet
 }
 
 // 处理客户端消息
