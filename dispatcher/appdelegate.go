@@ -43,12 +43,6 @@ func (this *AppDelegate) OnInit(app *app.Application) {
 		cntorOpt.AcceptorType = network.C_ACCEPTOR_TYPE_TCP
 		cntorOpt.BackendSessionOpt.WorldConnOpts.Heartbeat = 3
 	}
-
-	// DispatcherClient 组件
-	disClientOpt := app.GetComponentMgr().GetDisClientOpt()
-	if nil != disClientOpt {
-		disClientOpt.Enable = false
-	}
 }
 
 // app 开始运行
@@ -61,7 +55,6 @@ func (this *AppDelegate) OnRun(app *app.Application) {
 		case pkt := <-this.serverPacketQueue:
 			//
 			zaplog.Debugf("%d", pkt.GetId())
-		default:
 		}
 	}
 }
