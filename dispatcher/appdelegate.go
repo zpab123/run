@@ -48,6 +48,12 @@ func (this *AppDelegate) OnInit(app *app.Application) {
 	if nil != disClientOpt {
 		disClientOpt.Enable = false
 	}
+
+	// DispatcherServer 组件
+	disServerOpt := app.GetComponentMgr().GetDisServerOpt()
+	if nil != disServerOpt {
+		disServerOpt.SessionOpt.WorldConnOpts.Heartbeat = 3
+	}
 }
 
 // app 开始运行
