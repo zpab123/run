@@ -34,9 +34,13 @@ func (this *AppDelegate) OnCreat(app *app.Application) {
 
 }
 
-// app 初始化成功
+// app 初始化
 func (this *AppDelegate) OnInit(app *app.Application) {
-
+	// dispatcherClient 组件配置
+	disClientOpt := app.GetComponentMgr().GetDisClientOpt()
+	if nil != disClientOpt {
+		disClientOpt.Enable = true
+	}
 }
 
 // app 开始运行
@@ -49,7 +53,6 @@ func (this *AppDelegate) OnRun(app *app.Application) {
 		case pkt := <-this.serverPacketQueue:
 			//
 			zaplog.Debugf("%d", pkt.GetId())
-		default:
 		}
 	}
 }
