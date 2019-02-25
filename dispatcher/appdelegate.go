@@ -37,22 +37,17 @@ func (this *AppDelegate) OnCreat(app *app.Application) {
 // app 初始化成功
 func (this *AppDelegate) OnInit(app *app.Application) {
 	// connector 组件参数
-	connectorOpt := app.GetComponentMgr().GetConnectorOpt()
-	if nil != connectorOpt {
-		connectorOpt.Frontend = false
-		connectorOpt.AcceptorType = network.C_ACCEPTOR_TYPE_TCP
+	cntorOpt := app.GetComponentMgr().GetConnectorOpt()
+	if nil != cntorOpt {
+		cntorOpt.Frontend = false
+		cntorOpt.AcceptorType = network.C_ACCEPTOR_TYPE_TCP
+		cntorOpt.BackendSessionOpt.WorldConnOpts.Heartbeat = 3
 	}
 
 	// DispatcherClient 组件
 	disClientOpt := app.GetComponentMgr().GetDisClientOpt()
 	if nil != disClientOpt {
 		disClientOpt.Enable = false
-	}
-
-	// DispatcherServer 组件
-	disServerOpt := app.GetComponentMgr().GetDisServerOpt()
-	if nil != disServerOpt {
-		disServerOpt.SessionOpt.WorldConnOpts.Heartbeat = 3
 	}
 }
 
