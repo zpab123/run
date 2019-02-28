@@ -14,6 +14,7 @@ import (
 // AppDelegate 对象
 
 type AppDelegate struct {
+	app               *app.Application     // app 对象
 	clientPacketQueue chan *network.Packet // 客户端消息队列
 	serverPacketQueue chan *network.Packet // 服务器消息队列
 }
@@ -31,7 +32,7 @@ func NewAppDelegate() *AppDelegate {
 
 // app 创建成功
 func (this *AppDelegate) OnCreat(app *app.Application) {
-
+	this.app = app
 }
 
 // app 初始化
@@ -74,8 +75,14 @@ func (this *AppDelegate) OnServerMessage(ses *session.BackendSession, packet *ne
 }
 
 // 处理客户端消息
-func handleClientPacket() {
+func (this *AppDelegate) handleClientPacket(pkt *network.Packet) {
+	id := pkt.GetId()
 
+	switch id {
+	case 1:
+	default:
+		zaplog.Panicf("收到客户端非法消息。id=%d", id)
+	}
 }
 
 // 处理服务器消息
