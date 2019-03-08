@@ -36,12 +36,11 @@ func (this *AppDelegate) OnCreat(app *app.Application) {
 
 // app 初始化成功
 func (this *AppDelegate) OnInit(app *app.Application) {
-	// connector 组件参数
-	cntorOpt := app.GetComponentMgr().GetConnectorOpt()
-	if nil != cntorOpt {
-		cntorOpt.Frontend = false
-		cntorOpt.AcceptorType = network.C_ACCEPTOR_TYPE_TCP
-		cntorOpt.BackendSessionOpt.WorldConnOpts.Heartbeat = 3
+	// Acceptor 组件参数
+	aptor := app.GetComponentMgr().GetAcceptorOpt()
+	if nil != aptor {
+		aptor.ForClient = false
+		aptor.AcceptorName = network.C_ACCEPTOR_NAME_TCP
 	}
 }
 
@@ -65,13 +64,13 @@ func (this *AppDelegate) OnStop(app *app.Application) {
 }
 
 // 收到1个新的客户端消息
-func (this *AppDelegate) OnClientMessage(ses *session.FrontendSession, packet *network.Packet) {
+func (this *AppDelegate) OnClientMessage(ses *session.ClientSession, packet *network.Packet) {
 	// 加入客户端消息队列
 	this.clientPacketQueue <- packet
 }
 
 // 收到1个新的服务器消息
-func (this *AppDelegate) OnServerMessage(ses *session.BackendSession, packet *network.Packet) {
+func (this *AppDelegate) OnServerMessage(ses *session.ServerSession, packet *network.Packet) {
 	this.serverPacketQueue <- packet
 }
 
