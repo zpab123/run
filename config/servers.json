@@ -6,8 +6,7 @@
     ],
 	"dispatcher":
 	[
-		{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3100, "clientHost": "", "cTcpPort": 0, "cWsPort":0},
-		{"name": "dispatcher_2", "host": "127.0.0.1", "port": 3101, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
+		{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3100, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
     ],
 	"scene":
 	[
@@ -22,8 +21,7 @@
     ],
 	"dispatcher":
 	[
-		{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3100, "clientHost": "", "cTcpPort": 0, "cWsPort":0},
-		{"name": "dispatcher_2", "host": "127.0.0.1", "port": 3101, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
+		{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3100, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
     ],
 	"scene":
 	[
