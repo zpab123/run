@@ -1,11 +1,18 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 
-	"golang.org/x/net/websocket" // websocket 库
+	"github.com/gorilla/websocket" // websocket 库
 )
+
+// 连接创建
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+}
 
 // 根路由
 func rootReq(w http.ResponseWriter, r *http.Request) {
@@ -14,6 +21,19 @@ func rootReq(w http.ResponseWriter, r *http.Request) {
 }
 
 // websocket 路由
-func wsReq(conn *websocket.Conn) {
+func wsReq(w http.ResponseWriter, r *http.Request) {
+	conn, err := upgrader.Upgrade(w, r, nil)
 
+	if nil != err {
+		fmt.Println("创建 websocket.conn 错误：", err)
+
+		return
+	}
+
+	ses := &Session{
+		Connection: conn,
+		Md5:        "",
+	}
+
+	ses.Recv()
 }
