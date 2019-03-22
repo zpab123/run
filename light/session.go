@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"run/light/protocol" // 消息协议
 
 	"github.com/gorilla/websocket" // websocket 库
@@ -33,7 +34,11 @@ func (this *Session) Recv() {
 
 // 消息解码
 func (this *Session) decode(data []byte) {
+	fmt.Println(data)
 
+	str := string(data[:])
+
+	fmt.Println(str)
 }
 
 // 分发消息
