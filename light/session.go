@@ -68,7 +68,7 @@ func (this *Session) distribute(mtype uint16, stype uint16, data []byte) {
 	fmt.Println(data)
 
 	switch mtype {
-	case protocol.C_MT_DATA1:
+	case protocol.C_MTYPE_LOGIN:
 		{
 
 		}

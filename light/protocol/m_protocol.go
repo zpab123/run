@@ -11,14 +11,14 @@ const (
 
 // 主协议常量
 const (
-	C_MT_DATA  uint16 = iota // 主协议1
-	C_MT_DATA1               // 主协议2
-	C_MT_DATA2               // 主协议3
+	C_MTYPE_DATA     uint16 = iota // 主协议1
+	C_MTYPE_LOGIN                  // 主协议2
+	C_MTYPE_REGISTER               // 主协议3
 )
 
 // 自协议常量
 const (
-	C_SUB_DATA  uint16 = iota // 子协议1
-	C_SUB_DATA1               // 子协议2
-	C_SUB_DATA2               // 子协议3
+	C_STYPE_DATA  uint16 = iota // 子协议1
+	C_STYPEDATA1                // 子协议2
+	C_STYPE_DATA2               // 子协议3
 )
