@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/binary"
+	"encoding/json"
 	"fmt"
 	"run/light/protocol" // 消息协议
 
@@ -18,6 +19,8 @@ type Session struct {
 func (this *Session) Recv() {
 	for {
 		_, data, err := this.Connection.ReadMessage()
+
+		//data = bytes.TrimSpace(bytes.Replace(data, newline, space, -1))
 
 		if nil != err {
 			break
@@ -63,16 +66,46 @@ func (this *Session) handleMsg(length uint16, body []byte) {
 
 // 分发消息
 func (this *Session) distribute(mtype uint16, stype uint16, data []byte) {
-	fmt.Println(mtype)
-	fmt.Println(stype)
-	fmt.Println(data)
+	sss := &protocol.Data{}
 
-	switch mtype {
-	case protocol.C_MTYPE_LOGIN:
-		{
+	err := json.Unmarshal(data, sss)
 
-		}
-	default:
-		panic("主协议错误")
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(sss)
 	}
+
+	// 回复测试
+	res := &protocol.LoginRes{
+		Code:  123,
+		Email: "shgshag",
+	}
+
+	this.send(1, 1, res)
+}
+
+// 发送数据
+func (this *Session) send(mtype uint16, stype uint16, data interface{}) {
+	b, err := json.Marshal(data)
+
+	if nil != err {
+		fmt.Println(err)
+		return
+	}
+
+	// packet
+	pkt := make([]byte, len(b)+4+3)
+	pkt[0] = protocol.C_TYPE_DATA
+	binary.LittleEndian.PutUint16(pkt[1:3], uint16(len(b)+4))
+
+	// body
+	binary.LittleEndian.PutUint16(pkt[3:5], mtype)
+	binary.LittleEndian.PutUint16(pkt[5:7], stype)
+	copy(pkt[7:], b[:])
+
+	fmt.Println(string(b))
+	fmt.Println(pkt[7:])
+
+	this.Connection.WriteMessage(websocket.BinaryMessage, pkt)
 }

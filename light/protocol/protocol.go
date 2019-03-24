@@ -9,4 +9,12 @@ type LoginReq struct {
 
 // 服务器 -> 客户端 登录结果
 type LoginRes struct {
+	Code  uint32
+	Email string // 邮箱
+}
+
+type Data struct {
+	Zp string `json:"zp"`
+	Cd string `json:"cd"`
+	Ef string `json:"ef"`
 }
