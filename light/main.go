@@ -10,6 +10,7 @@ func main() {
 
 	// 注册路由
 	http.HandleFunc("/ws", wsReq)
+	http.HandleFunc("/", rootReq)
 
 	// 开启服务器
 	addr := "127.0.0.1:8888"
