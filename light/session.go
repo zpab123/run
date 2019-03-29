@@ -5,14 +5,19 @@ import (
 	"encoding/json"
 	"fmt"
 	"run/light/protocol" // 消息协议
+	"time"
 
 	"github.com/gorilla/websocket" // websocket 库
 )
 
 // 会话对象
 type Session struct {
-	Connection *websocket.Conn // websocket 连接对象
-	Md5        string          // 房间加密信息
+	Connection   *websocket.Conn // websocket 连接对象
+	Md5          string          // 房间加密信息
+	playerID     uint32          // 玩家ID
+	id           uint32          // sessionID
+	lastRecvTime time.Time       // 上次接收到消息的时间
+	lastSendTime time.Time       // 上次发送消息的时间
 }
 
 // 接收数据
@@ -42,8 +47,10 @@ func (this *Session) handlePacket(data []byte) {
 	le := binary.LittleEndian.Uint16(data[2:4])  // 长度
 
 	switch mid {
-	case protocol.C_TYPE_HANDSHAKE: // 客户端->服务器握手请求
-	case protocol.C_TYPE_DATA: // 数据类
+	case protocol.C_MID_HANDSHAKE: // 客户端->服务器握手请求
+	case protocol.C_MID_HANDSHAKE_ACK: // 客户端->服务器握手ACK
+	case protocol.C_MID_HEARTBEAT: // 心跳消息
+	case protocol.C_MID_DATA: // 数据类
 		this.handleMsg(le, data[4:])
 	}
 }
@@ -65,7 +72,7 @@ func (this *Session) handleMsg(length uint16, body []byte) {
 }
 
 // 分发消息
-func (this *Session) distribute(mtype uint16, stype uint16, data []byte) {
+func (this *Session) distribute(mid uint16, sid uint16, data []byte) {
 	sss := &protocol.Data{}
 
 	err := json.Unmarshal(data, sss)
@@ -96,8 +103,8 @@ func (this *Session) send(mtype uint16, stype uint16, data interface{}) {
 
 	// packet
 	pkt := make([]byte, 2+2+2+len(b))
-	binary.LittleEndian.PutUint16(pkt[0:2], protocol.C_TYPE_DATA) // 主id
-	binary.LittleEndian.PutUint16(pkt[2:4], uint16(len(b)+2))     // 长度
+	binary.LittleEndian.PutUint16(pkt[0:2], protocol.C_MID_DATA) // 主id
+	binary.LittleEndian.PutUint16(pkt[2:4], uint16(len(b)+2))    // 长度
 
 	// body
 	binary.LittleEndian.PutUint16(pkt[4:6], stype) // 子id
@@ -107,4 +114,9 @@ func (this *Session) send(mtype uint16, stype uint16, data interface{}) {
 	fmt.Println(pkt[6:])
 
 	this.Connection.WriteMessage(websocket.BinaryMessage, pkt)
+}
+
+// 设置玩家id
+func (this *Session) bindPlayer(playerID uint32) {
+	this.playerID = playerID
 }
