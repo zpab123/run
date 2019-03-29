@@ -26,7 +26,7 @@ func (this *Session) Recv() {
 			break
 		}
 
-		if len(data) < 3 {
+		if len(data) < 4 {
 			break
 		}
 
@@ -38,19 +38,19 @@ func (this *Session) Recv() {
 
 // packet 层处理
 func (this *Session) handlePacket(data []byte) {
-	t := uint8(data[0])                         // 类型
-	le := binary.LittleEndian.Uint16(data[1:3]) // 长度
+	mid := binary.LittleEndian.Uint16(data[0:2]) // 主id
+	le := binary.LittleEndian.Uint16(data[2:4])  // 长度
 
-	switch t {
+	switch mid {
 	case protocol.C_TYPE_HANDSHAKE: // 客户端->服务器握手请求
 	case protocol.C_TYPE_DATA: // 数据类
-		this.handleMsg(le, data[3:])
+		this.handleMsg(le, data[4:])
 	}
 }
 
 // message 层处理
 func (this *Session) handleMsg(length uint16, body []byte) {
-	if length < 4 {
+	if length < 2 {
 		return
 	}
 
@@ -82,7 +82,7 @@ func (this *Session) distribute(mtype uint16, stype uint16, data []byte) {
 		Email: "shgshag",
 	}
 
-	this.send(1, 1, res)
+	this.send(4, 1, res)
 }
 
 // 发送数据
@@ -95,17 +95,16 @@ func (this *Session) send(mtype uint16, stype uint16, data interface{}) {
 	}
 
 	// packet
-	pkt := make([]byte, len(b)+4+3)
-	pkt[0] = protocol.C_TYPE_DATA
-	binary.LittleEndian.PutUint16(pkt[1:3], uint16(len(b)+4))
+	pkt := make([]byte, 2+2+2+len(b))
+	binary.LittleEndian.PutUint16(pkt[0:2], protocol.C_TYPE_DATA) // 主id
+	binary.LittleEndian.PutUint16(pkt[2:4], uint16(len(b)+2))     // 长度
 
 	// body
-	binary.LittleEndian.PutUint16(pkt[3:5], mtype)
-	binary.LittleEndian.PutUint16(pkt[5:7], stype)
-	copy(pkt[7:], b[:])
+	binary.LittleEndian.PutUint16(pkt[4:6], stype) // 子id
+	copy(pkt[6:], b[:])
 
 	fmt.Println(string(b))
-	fmt.Println(pkt[7:])
+	fmt.Println(pkt[6:])
 
 	this.Connection.WriteMessage(websocket.BinaryMessage, pkt)
 }

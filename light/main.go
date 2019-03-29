@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	go runTimer()
+	//go runTimer()
 
 	// 注册路由
 	http.HandleFunc("/ws", wsReq)

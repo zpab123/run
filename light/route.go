@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket" // websocket 库
+	"github.com/zpab123/zaplog"    // log
 )
 
 // 连接创建
@@ -37,6 +38,8 @@ func wsReq(w http.ResponseWriter, r *http.Request) {
 		Connection: conn,
 		Md5:        "",
 	}
+
+	zaplog.Debugf("收到新的 websocket 连接: %s", conn.RemoteAddr())
 
 	ses.Recv()
 }
