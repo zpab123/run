@@ -51,23 +51,22 @@ func (this *Session) handlePacket(data []byte) {
 	case protocol.C_MID_HANDSHAKE_ACK: // 客户端->服务器握手ACK
 	case protocol.C_MID_HEARTBEAT: // 心跳消息
 	case protocol.C_MID_DATA: // 数据类
-		this.handleMsg(le, data[4:])
+		this.handleMsg(mid, le, data[4:])
 	}
 }
 
 // message 层处理
-func (this *Session) handleMsg(length uint16, body []byte) {
+func (this *Session) handleMsg(mid uint16, length uint16, body []byte) {
 	if length < 2 {
 		return
 	}
 
-	mtype := binary.LittleEndian.Uint16(body[0:2])
-	stype := binary.LittleEndian.Uint16(body[2:4])
+	sid := binary.LittleEndian.Uint16(body[0:2])
 
-	if length > 4 {
-		this.distribute(mtype, stype, body[4:])
+	if length > 2 {
+		this.distribute(mid, sid, body[2:])
 	} else {
-		this.distribute(mtype, stype, nil)
+		this.distribute(mid, sid, nil)
 	}
 }
 
