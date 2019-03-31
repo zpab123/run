@@ -43,6 +43,12 @@ func (this *Session) Recv() {
 
 // packet 层处理
 func (this *Session) handlePacket(data []byte) {
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("异常捕获", err)
+		}
+	}()
+
 	mid := binary.LittleEndian.Uint16(data[0:2]) // 主id
 	le := binary.LittleEndian.Uint16(data[2:4])  // 长度
 
@@ -52,6 +58,8 @@ func (this *Session) handlePacket(data []byte) {
 	case protocol.C_MID_HEARTBEAT: // 心跳消息
 	case protocol.C_MID_DATA: // 数据类
 		this.handleMsg(mid, le, data[4:])
+	default:
+		panic("主协议错误")
 	}
 }
 
@@ -88,7 +96,7 @@ func (this *Session) distribute(mid uint16, sid uint16, data []byte) {
 		Email: "shgshag",
 	}
 
-	this.send(4, 1, res)
+	this.send(protocol.C_MID_DATA, 1, res)
 }
 
 // 发送数据

@@ -58,4 +58,7 @@ func wsReq(w http.ResponseWriter, r *http.Request) {
 	sessionMap.Store(ses.id, ses)
 
 	ses.Recv()
+
+	// 断开
+	sessionMap.Delete(ses.id)
 }
