@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	num = 5            // 机器人数量
+	num = 500          // 机器人数量
 	wg  sync.WaitGroup // 等待组
 )
 
@@ -16,7 +16,7 @@ func main() {
 
 		go newRobot()
 
-		time.Sleep(3 * time.Second)
+		time.Sleep(100 * time.Millisecond)
 	}
 
 	wg.Wait()

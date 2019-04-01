@@ -11,6 +11,11 @@ import (
 	"github.com/gorilla/websocket" // websocket 库
 )
 
+var (
+	//raddr = "ws://192.168.0.222:8888/ws"
+	raddr = "ws://127.0.0.1:8888/ws"
+)
+
 type robot struct {
 	addr   string          // 服务器地址
 	wsConn *websocket.Conn // 连接
@@ -20,7 +25,7 @@ type robot struct {
 // 新建机器人
 func NewRobot() *robot {
 	r := &robot{
-		addr: "ws://127.0.0.1:8888/ws",
+		addr: "ws://192.168.0.222:8888/ws",
 		stop: make(chan struct{}),
 	}
 

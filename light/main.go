@@ -13,6 +13,7 @@ func main() {
 	http.HandleFunc("/", rootReq)
 
 	// 开启服务器
+	//addr := "192.168.0.222:8888"
 	addr := "127.0.0.1:8888"
 
 	fmt.Println("开启服务器", addr)
