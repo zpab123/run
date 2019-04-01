@@ -4,9 +4,10 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
-	"math/rand"
+
+	//"math/rand"
 	"run/light/protocol" // 协议
-	"time"
+	//"time"
 
 	"github.com/gorilla/websocket" // websocket 库
 )
@@ -20,13 +21,16 @@ type robot struct {
 	addr   string          // 服务器地址
 	wsConn *websocket.Conn // 连接
 	stop   chan struct{}   // 停止信号
+	count  int             // 模拟消息次数
+	recv   int             // 接收消息次数
 }
 
 // 新建机器人
 func NewRobot() *robot {
 	r := &robot{
-		addr: "ws://192.168.0.222:8888/ws",
-		stop: make(chan struct{}),
+		addr:  "ws://192.168.0.222:8888/ws",
+		stop:  make(chan struct{}),
+		count: 100,
 	}
 
 	return r
@@ -35,14 +39,14 @@ func NewRobot() *robot {
 // 启动
 func (this *robot) Run() {
 	this.runGame()
-	this.login()
+	// this.login()
 	go this.game()
 	this.readData()
-	//go this.readData()
+	// go this.readData()
 
-	//<-this.stop
+	// <-this.stop
 
-	fmt.Println("机器人退出")
+	// fmt.Println("机器人退出")
 }
 
 // 启动游戏
@@ -62,23 +66,20 @@ func (this *robot) login() {
 
 // 游戏行为
 func (this *robot) game() {
-	n := rand.Int()%5 + 3
-	t := time.Duration(n)
+	//n := rand.Int()%5 + 3
+	//t := time.Duration(n)
 
-	for {
-		select {
-		case <-time.After(t * time.Second):
-			this.sendDta()
-		}
+	for i := 0; i < this.count; i++ {
+		//select {
+		//case <-time.After(t * time.Second):
+		//this.sendDta()
+		//}
+		this.sendDta()
 	}
 }
 
 // 数据接收
 func (this *robot) readData() {
-	defer func() {
-		// this.stop <- struct{}{}
-	}()
-
 	if nil == this.wsConn {
 		return
 	}
@@ -95,6 +96,11 @@ func (this *robot) readData() {
 		}
 
 		this.handlePacket(buf)
+
+		this.recv++
+		if this.recv >= this.count {
+			break
+		}
 	}
 }
 
@@ -153,7 +159,7 @@ func (this *robot) distribute(mid uint16, sid uint16, data []byte) {
 
 		return
 	} else {
-		fmt.Println("res-code:", res.Code)
+		// fmt.Println("res-code:", res.Code)
 	}
 }
 

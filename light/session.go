@@ -87,7 +87,7 @@ func (this *Session) distribute(mid uint16, sid uint16, data []byte) {
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
-		fmt.Println("client:", req.Zp)
+		// fmt.Println("client:", req.Zp)
 	}
 
 	// 回复测试
