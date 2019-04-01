@@ -80,14 +80,14 @@ func (this *Session) handleMsg(mid uint16, length uint16, body []byte) {
 
 // 分发消息
 func (this *Session) distribute(mid uint16, sid uint16, data []byte) {
-	sss := &protocol.Data{}
+	req := &protocol.Data{}
 
-	err := json.Unmarshal(data, sss)
+	err := json.Unmarshal(data, req)
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err.Error())
 	} else {
-		fmt.Println(sss)
+		fmt.Println("client:", req.Zp)
 	}
 
 	// 回复测试
@@ -96,29 +96,27 @@ func (this *Session) distribute(mid uint16, sid uint16, data []byte) {
 		Email: "shgshag",
 	}
 
-	this.send(protocol.C_MID_DATA, 1, res)
+	this.send(mid, sid, res)
 }
 
 // 发送数据
-func (this *Session) send(mtype uint16, stype uint16, data interface{}) {
+func (this *Session) send(mid uint16, sid uint16, data interface{}) {
 	b, err := json.Marshal(data)
 
 	if nil != err {
-		fmt.Println(err)
+		fmt.Println(err.Error())
+
 		return
 	}
 
 	// packet
 	pkt := make([]byte, 2+2+2+len(b))
-	binary.LittleEndian.PutUint16(pkt[0:2], protocol.C_MID_DATA) // 主id
-	binary.LittleEndian.PutUint16(pkt[2:4], uint16(len(b)+2))    // 长度
+	binary.LittleEndian.PutUint16(pkt[0:2], mid)              // 主id
+	binary.LittleEndian.PutUint16(pkt[2:4], uint16(len(b)+2)) // 长度
 
 	// body
-	binary.LittleEndian.PutUint16(pkt[4:6], stype) // 子id
+	binary.LittleEndian.PutUint16(pkt[4:6], sid) // 子id
 	copy(pkt[6:], b[:])
-
-	fmt.Println(string(b))
-	fmt.Println(pkt[6:])
 
 	this.Connection.WriteMessage(websocket.BinaryMessage, pkt)
 }
