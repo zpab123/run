@@ -23,12 +23,8 @@ func NewAppDelegate() *AppDelegate {
 	return ad
 }
 
-// app 创建成功
-func (this *AppDelegate) OnCreat(app *app.Application) {
-}
-
 // app 初始化
-func (this *AppDelegate) OnInit(app *app.Application) {
+func (this *AppDelegate) Init(app *app.Application) {
 }
 
 // app 开始运行
