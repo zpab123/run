@@ -24,6 +24,7 @@ func NewAppDelegate() *AppDelegate {
 
 // app 初始化
 func (this *AppDelegate) Init(app *app.Application) {
+	app.Option.Cluster = true
 }
 
 // 收到1个新的客户端消息
