@@ -1,0 +1,14 @@
+gate
+	gate.exe -name gate_1
+
+center
+	center.exe -name center_1
+
+
+
+-----------------------------------------------------------------------------------------------------
+govendor
+
+govendor init
+
+govendor add +external

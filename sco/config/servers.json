@@ -4,14 +4,10 @@
 	[
 		{"name": "gate_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010}
     ],
-	"dispatcher":
+	"center":
 	[
-		{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3100, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
-    ],
-	"scene":
-	[
-		{"name": "scene1", "host": "127.0.0.1", "port": 3200, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
-	]
+		{"name": "center_1", "host": "127.0.0.1", "port": 3100, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
+    ]
   },
 
   "production": {
@@ -19,13 +15,9 @@
 	[
 		{"name": "gate_1", "host": "127.0.0.1", "port": 3000, "clientHost": "192.168.1.222", "cTcpPort": 9000, "cWsPort":9010}
     ],
-	"dispatcher":
+	"center":
 	[
-		{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3100, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
-    ],
-	"scene":
-	[
-		{"name": "scene1", "host": "127.0.0.1", "port": 3200, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
-	]
+		{"name": "center_1", "host": "127.0.0.1", "port": 3100, "clientHost": "", "cTcpPort": 0, "cWsPort":0}
+    ]
   }
 }

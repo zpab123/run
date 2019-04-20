@@ -13,4 +13,6 @@
 
 # 需要忽略的文件夹
 /consul_data
+/sco/center/vendor
+/sco/gate/vendor
 
