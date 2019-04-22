@@ -12,3 +12,9 @@ govendor
 govendor init
 
 govendor add +external
+
+从你的GOPAHT中更新你工程的依赖包
+govendor update github.com/zpab123/sco
+
+添加或者更新vendor文件夹中的包
+govendor fetch github.com/zpab123/sco
