@@ -16,8 +16,8 @@ github.com/kisielk/errcheck v1.1.0/go.mod h1:EZBBE59ingxPouuu3KfxchcWSUPOHkagtvW
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
-github.com/zpab123/sco v0.0.0-20190423005302-3c5ddcd231dc h1:mcnzu9BOCPA+JXndTpEnNjdSwmSEzE9J80bneizEdkk=
-github.com/zpab123/sco v0.0.0-20190423005302-3c5ddcd231dc/go.mod h1:7o/y2cHb+MgAUzOT8GxlMRfxl3UQNx+Z3p2xKZDs6Dk=
+github.com/zpab123/sco v0.0.1 h1:84ofAumkJW+BmPix4itUkcUvCIVUCAWTjTZAihHkVN4=
+github.com/zpab123/sco v0.0.1/go.mod h1:7o/y2cHb+MgAUzOT8GxlMRfxl3UQNx+Z3p2xKZDs6Dk=
 github.com/zpab123/syncutil v0.0.0-20190423001844-dd7627358cf1 h1:Lts3rvIskOnthXR0El3yMnDCRL2X84MIhbDMz5CMVvU=
 github.com/zpab123/syncutil v0.0.0-20190423001844-dd7627358cf1/go.mod h1:yDlWY2QeVi8Abro1PDMSHkbeo15Dx3jC7jam7Crhuwk=
 github.com/zpab123/zaplog v0.0.0-20190422235112-2a6bffec1b74 h1:4mm/mWJwIc5GLYaL4QzT+9LuDd8hoyjH9CjRj3THRp8=
