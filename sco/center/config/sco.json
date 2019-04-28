@@ -1,0 +1,43 @@
+{
+  "development": {
+	"gate":{
+		"mid":1,
+		"cluster":
+		[
+			{"name": "gate_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+			{"name": "gate_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+			{"name": "gate_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+		]
+	},
+	"dispatcher":{
+		"mid":2,
+		"cluster":
+		[
+			{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+			{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+			{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+		]
+	}
+  },
+
+  "production": {
+	"gate":{
+		"mid":1,
+		"cluster":
+		[
+			{"name": "gate_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+			{"name": "gate_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+			{"name": "gate_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+		]
+	},
+	"dispatcher":{
+		"mid":2,
+		"cluster":
+		[
+			{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+			{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+			{"name": "dispatcher_1", "host": "127.0.0.1", "port": 3000, "clientHost": "127.0.0.1", "cTcpPort": 9000, "cWsPort":9010},
+		]
+	}
+  }
+}
