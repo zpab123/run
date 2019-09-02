@@ -9,5 +9,6 @@ import (
 
 // 主入口
 func main() {
-
+	app := sco.NewApp()
+	app.Run()
 }
