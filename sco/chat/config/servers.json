@@ -6,7 +6,7 @@
     ],
 	"chat":
 	[
-		{"name": "chat_1", "host": "127.0.0.1", "port": 3001, "clientHost": "127.0.0.1", "cTcpPort": 9001, "cWsPort":9011}
+		{"name": "chat_1", "host": "192.168.101.180", "port": 3001, "clientHost": "127.0.0.1", "cTcpPort": 9001, "cWsPort":9011}
 	],
 	"dispatcher":
 	[

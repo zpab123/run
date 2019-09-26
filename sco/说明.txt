@@ -2,7 +2,7 @@ gate
 	gate.exe -name gate_1
 
 chat
-	gate.exe -name chat_1
+	chat.exe -name chat_1
 
 center
 	center.exe -name center_1
