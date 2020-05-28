@@ -9,5 +9,6 @@ import (
 
 func init() {
 	app := sco.GetApp()
-	app.Options.ClientAcceptorOpt.WsAddr = "192.168.1.88:5036"
+	app.Options.NetOpt.WsAddr = "192.168.1.88:5036"
+	app.RegisterHandler(&Hander{})
 }
