@@ -9,6 +9,8 @@ import (
 
 func init() {
 	app := sco.GetApp()
+	app.Options.Name = "gate_1"
+	app.Options.ServiceId = 200
 	app.Options.NetOpt.WsAddr = "192.168.1.88:5036"
 	app.Options.Cluster = true
 	app.Options.RpcOpt.Laddr = "192.168.1.88:6036"
