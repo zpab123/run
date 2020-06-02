@@ -13,6 +13,6 @@ func init() {
 	app.Options.ServiceId = 200
 	app.Options.NetOpt.WsAddr = "192.168.1.88:5036"
 	app.Options.Cluster = true
-	app.Options.RpcOpt.Laddr = "192.168.1.88:6036"
+	app.Options.RpcServer.Laddr = "192.168.1.88:6036"
 	app.RegisterHandler(&Hander{})
 }
