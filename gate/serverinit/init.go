@@ -14,5 +14,5 @@ func init() {
 	app.Options.Net.WsAddr = "192.168.1.88:5036"
 	app.Options.Cluster = true
 	app.Options.RpcServer.Laddr = "192.168.1.88:6036"
-	app.RegisterHandler(&Hander{})
+	app.SetHandler(&Hander{})
 }

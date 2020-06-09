@@ -14,6 +14,6 @@ func init() {
 	app.Options.ServiceId = 201
 	app.Options.Cluster = true
 	app.Options.RpcServer.Laddr = "192.168.1.88:7036"
-	app.RegisterHandler(&Hander{})
+	app.SetHandler(&Hander{})
 	app.SetRemoteService(&Remote{})
 }

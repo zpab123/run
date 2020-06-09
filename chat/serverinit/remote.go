@@ -4,7 +4,7 @@
 package serverinit
 
 import (
-	"fmt"
+	"github.com/zpab123/sco/network"
 )
 
 // /////////////////////////////////////////////////////////////////////////////
@@ -14,7 +14,9 @@ type Remote struct {
 }
 
 func (this *Remote) OnData(data []byte) []byte {
-	fmt.Println("111")
+	pkt := network.NewPacket(201)
+	str := "收到数据"
+	pkt.AppendString(str)
 
-	return data
+	return pkt.Data()
 }
