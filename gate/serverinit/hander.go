@@ -15,9 +15,11 @@ import (
 type Hander struct {
 }
 
-func (this *Hander) OnPacket(a *network.Agent, pkt *network.Packet) {
+func (this *Hander) OnData(data []byte) (bool, []byte) {
 	fmt.Println("OnPacket")
-	if pkt.GetMid() == 123 {
-		fmt.Println(pkt.ReadString())
-	}
+	fmt.Println(string(data))
+
+	pkt := network.NewPacket(123)
+	pkt.AppendString("gate 收到数据")
+	return true, pkt.Data()
 }
