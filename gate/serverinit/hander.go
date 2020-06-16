@@ -6,6 +6,7 @@ package serverinit
 import (
 	"fmt"
 
+	"github.com/zpab123/sco"
 	"github.com/zpab123/sco/network"
 )
 
@@ -19,7 +20,16 @@ func (this *Hander) OnData(data []byte) (bool, []byte) {
 	fmt.Println("OnPacket")
 	fmt.Println(string(data))
 
-	pkt := network.NewPacket(123)
-	pkt.AppendString("gate 收到数据")
-	return true, pkt.Data()
+	pkt := network.NewPacket(201)
+	var res string
+
+	rpc := sco.Call(201, data)
+	if rpc == nil {
+		res = "没收到rpc数据"
+		pkt.AppendString(res)
+		return true, pkt.Data()
+	} else {
+		pkt.AppendBytes(rpc)
+		return true, pkt.Data()
+	}
 }
