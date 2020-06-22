@@ -14,6 +14,13 @@ func init() {
 	app.Options.Mid = 201
 	app.Options.Cluster = true
 	app.Options.RpcServer.Laddr = "192.168.1.88:7036"
+
+	app.Options.Discovery.Endpoints = []string{
+		"http://192.168.1.69:2379",
+		"http://192.168.1.69:2479",
+		"http://192.168.1.69:2579",
+	}
+
 	app.SetHandler(&Hander{})
 	app.SetRemote(&Remote{})
 }
