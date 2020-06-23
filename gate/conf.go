@@ -15,7 +15,7 @@ import (
 // 设置参数
 func setConf() {
 	// 服务id
-	// setMid()
+	setMid()
 
 	// 设置前端
 	setFrontend()
@@ -23,7 +23,7 @@ func setConf() {
 
 // 设置服务id
 func setMid() {
-	remote.SetAppID("public")
+	remote.SetAppID(appid)
 	p := viper.New()
 	p.SetConfigType("prop")
 
