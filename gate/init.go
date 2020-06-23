@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/zpab123/sco"
 )
 
 var (
@@ -18,6 +20,9 @@ var (
 func init() {
 	// 解析启动参数
 	parseArgs()
+
+	// 设置参数
+	setConf()
 }
 
 // 解析启动参数
@@ -34,6 +39,7 @@ func parseArgs() {
 		os.Exit(1)
 	} else {
 		appid = *id
+		sco.GetApp().Options.Id = appid
 	}
 
 	// 配置中心
