@@ -7,10 +7,10 @@ import (
 //
 func init() {
 	app := sco.GetApp()
-	app.Options.Name = "match_1v1"
+	app.Options.Name = "match_1v1_00"
 	app.Options.Mid = 202
 	app.Options.Cluster = true
-	app.Options.RpcServer.Laddr = "192.168.1.88:4036"
+	app.Options.RpcServer.Laddr = "192.168.1.88:8100"
 
 	app.Options.Discovery.Endpoints = []string{
 		"http://192.168.1.69:2379",
