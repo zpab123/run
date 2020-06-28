@@ -5,5 +5,8 @@ import (
 )
 
 func main() {
+	m := newmatch()
+	go m.run()
+
 	sco.Run()
 }
