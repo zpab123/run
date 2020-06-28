@@ -8,6 +8,9 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/zpab123/sco"
+	"github.com/zpab123/sco/app"
 )
 
 var (
@@ -17,6 +20,8 @@ var (
 
 func init() {
 	appid = "match_1v1"
+
+	sco.GetApp().Options.AppType = app.C_APP_TYPE_BACKEND
 
 	// 解析启动参数
 	parseArgs()
