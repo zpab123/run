@@ -29,19 +29,19 @@ func setMid() {
 
 	err := p.AddRemoteProvider("apollo", confUrl[0], "ruixue.bomb")
 	if nil != err {
-		fmt.Printf("设置 apollo 配置中心失败。err=%s\n", err.Error())
+		fmt.Printf("[setMid] 设置 apollo 配置中心失败。err=%s\n", err.Error())
 		os.Exit(1)
 	}
 
 	err = p.ReadRemoteConfig()
 	if nil != err {
-		fmt.Printf("从配置中心获取公共配置失败。err=%s\n", err.Error())
+		fmt.Printf("[setMid] 从配置中心获取公共配置失败。err=%s\n", err.Error())
 		os.Exit(1)
 	}
 
 	mid := p.GetUint32("mid.gate")
 	if mid <= 0 {
-		fmt.Println("gate 服务id 为0，启动失败。")
+		fmt.Println("[setMid] gate 服务id 为0，启动失败。")
 		os.Exit(1)
 	}
 
@@ -67,7 +67,5 @@ func setFrontend() {
 	}
 
 	sco.GetApp().Options.Frontend.WsAddr = v.GetString("Frontend.WsAddr")
-	fmt.Println("WsAddr", sco.GetApp().Options.Frontend.WsAddr)
 	sco.GetApp().Options.Frontend.TcpAddr = v.GetString("Frontend.TcpAddr")
-	fmt.Println("TcpAddr", sco.GetApp().Options.Frontend.TcpAddr)
 }
