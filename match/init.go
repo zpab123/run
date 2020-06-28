@@ -20,6 +20,7 @@ var (
 
 func init() {
 	appid = "match_1v1"
+	sco.GetApp().Options.Id = appid
 
 	sco.GetApp().Options.AppType = app.C_APP_TYPE_BACKEND
 

@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/shima-park/agollo/viper-remote"
 	"github.com/spf13/viper"
@@ -88,4 +89,23 @@ func setCluster() {
 	}
 
 	sco.GetApp().Options.RpcServer.Laddr = la
+
+	setDis()
+}
+
+// 服务发现地址
+func setDis() {
+	en := publicConf.GetString("Discovery.endpoints")
+	if "" == en {
+		fmt.Println("[setDis] gate 服务 Discover.endpoints 为空，启动失败。")
+		os.Exit(1)
+	}
+
+	enl := strings.Split(en, "|")
+	if len(enl) <= 0 {
+		fmt.Println("[setDis] gate 服务 Discover.endpoints 长度为空，启动失败。")
+		os.Exit(1)
+	}
+
+	sco.GetApp().Options.Discovery.Endpoints = enl
 }
