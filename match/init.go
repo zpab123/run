@@ -1,22 +1,54 @@
+// /////////////////////////////////////////////////////////////////////////////
+// 服务器初始化
+
 package main
 
 import (
-	"github.com/zpab123/sco"
+	"flag"
+	"fmt"
+	"os"
+	"strings"
 )
 
-//
-func init() {
-	app := sco.GetApp()
-	app.Options.Name = "match_1v1_00"
-	app.Options.Mid = 202
-	app.Options.Cluster = true
-	app.Options.RpcServer.Laddr = "192.168.1.88:8100"
+var (
+	confUrl []string = make([]string, 0) // 配置中心地址
+	appid   string   = ""                // app id
+)
 
-	app.Options.Discovery.Endpoints = []string{
-		"http://192.168.1.69:2379",
-		"http://192.168.1.69:2479",
-		"http://192.168.1.69:2579",
+func init() {
+	appid = "match_1v1"
+
+	// 解析启动参数
+	parseArgs()
+
+	// 设置参数
+	setConf()
+}
+
+// 解析启动参数
+func parseArgs() {
+	ccu := flag.String("ccu", "", "config center url") // 配置中心地址集合
+
+	// 解析参数
+	flag.Parse()
+
+	// 配置中心
+	if *ccu == "" {
+		fmt.Printf("配置中心参数 [ccu] 为空，启动失败！")
+		os.Exit(1)
+	} else {
+		parseConfUrl(*ccu)
+	}
+}
+
+// 解析配置中心地址
+func parseConfUrl(u string) {
+	us := strings.Split(u, "|")
+	if len(us) <= 0 {
+		fmt.Printf("配置中心参数 [ccu] 错误，启动失败！")
+		os.Exit(1)
+		return
 	}
 
-	app.SetHandler(&Hander{})
+	confUrl = append(confUrl, us...)
 }
