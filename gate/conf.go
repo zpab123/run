@@ -12,34 +12,66 @@ import (
 	"github.com/zpab123/sco"
 )
 
+var (
+	appConf    *viper.Viper // app 配置
+	publicConf *viper.Viper // 公共配置
+)
+
 // 设置参数
 func setConf() {
+	// 设置 viper
+	setViper()
+
 	// 服务id
 	setMid()
 
 	// 设置前端
 	setFrontend()
+
+	// 设置集群
+	setCluster()
 }
 
-// 设置服务id
-func setMid() {
+// 设置 viper
+func setViper() {
 	remote.SetAppID(appid)
 	p := viper.New()
 	p.SetConfigType("prop")
 
 	err := p.AddRemoteProvider("apollo", confUrl[0], "ruixue.bomb")
 	if nil != err {
-		fmt.Printf("[setMid] 设置 apollo 配置中心失败。err=%s\n", err.Error())
+		fmt.Printf("[setViper] 设置 apollo 配置中心失败。err=%s\n", err.Error())
 		os.Exit(1)
 	}
 
 	err = p.ReadRemoteConfig()
 	if nil != err {
-		fmt.Printf("[setMid] 从配置中心获取公共配置失败。err=%s\n", err.Error())
+		fmt.Printf("[setViper] 从配置中心获取公共配置失败。err=%s\n", err.Error())
 		os.Exit(1)
 	}
 
-	mid := p.GetUint32("mid.gate")
+	publicConf = p
+
+	a := viper.New()
+	a.SetConfigType("prop")
+
+	err = a.AddRemoteProvider("apollo", confUrl[0], "application")
+	if nil != err {
+		fmt.Printf("[setViper] 设置 apollo 配置中心失败。err=%s\n", err.Error())
+		os.Exit(1)
+	}
+
+	err = a.ReadRemoteConfig()
+	if nil != err {
+		fmt.Printf("[setViper] 读取%s的配置失败。err=%s\n", appid, err.Error())
+		os.Exit(1)
+	}
+	appConf = a
+}
+
+// 设置服务id
+func setMid() {
+	mid := publicConf.GetUint32("mid.gate")
 	if mid <= 0 {
 		fmt.Println("[setMid] gate 服务id 为0，启动失败。")
 		os.Exit(1)
@@ -50,22 +82,19 @@ func setMid() {
 
 // 设置前端
 func setFrontend() {
-	remote.SetAppID(appid)
-	v := viper.New()
-	v.SetConfigType("prop")
+	sco.GetApp().Options.Frontend.WsAddr = appConf.GetString("Frontend.WsAddr")
+	sco.GetApp().Options.Frontend.TcpAddr = appConf.GetString("Frontend.TcpAddr")
+}
 
-	err := v.AddRemoteProvider("apollo", confUrl[0], "application")
-	if nil != err {
-		fmt.Printf("[setFrontend] 设置 apollo 配置中心失败。err=%s\n", err.Error())
+// 设置集群
+func setCluster() {
+	sco.GetApp().Options.Cluster = true
+
+	la := appConf.GetString("RpcServer.Laddr")
+	if "" == la {
+		fmt.Println("[setCluster] gate 服务 RpcServer.Laddr 为空，启动失败。")
 		os.Exit(1)
 	}
 
-	err = v.ReadRemoteConfig()
-	if nil != err {
-		fmt.Printf("[setFrontend] 读取%s的配置失败。err=%s\n", appid, err.Error())
-		os.Exit(1)
-	}
-
-	sco.GetApp().Options.Frontend.WsAddr = v.GetString("Frontend.WsAddr")
-	sco.GetApp().Options.Frontend.TcpAddr = v.GetString("Frontend.TcpAddr")
+	sco.GetApp().Options.RpcServer.Laddr = la
 }
