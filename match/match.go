@@ -4,6 +4,7 @@
 package main
 
 import (
+	"math"
 	"math/rand"
 	"time"
 
@@ -37,7 +38,7 @@ func (this *match) run() {
 	for {
 		select {
 		case <-t.C:
-			this.soft()
+			matchvs()
 		}
 	}
 }
@@ -67,9 +68,43 @@ func (this *match) soft() {
 func genRand() {
 	vs_1v1 = vs_1v1[0:0]
 
-	var r uint32
-	for i := 0; i < 10000; i++ {
-		r = rand.Uint32()
-		vs_1v1 = append(vs_1v1, r)
+	var r int32
+	for i := 0; i < 50000; i++ {
+		r = rand.Int31n(3500) + 1000
+		vs_1v1 = append(vs_1v1, uint32(r))
 	}
+}
+
+func matchvs() {
+	zaplog.Debug("-----s------")
+	genRand()
+
+	ln := len(vs_1v1)
+	zaplog.Debug("长度", zaplog.Uint32("ln", uint32(ln)))
+	var sep float64
+	var min float64
+	for i := ln - 1; i >= 0; i-- {
+		if 0 == vs_1v1[i] {
+			continue
+		}
+		min = float64(vs_1v1[i])
+
+		for j := i - 1; j >= 1; j-- {
+			if 0 == vs_1v1[j] {
+				continue
+			}
+
+			sep = math.Abs(float64(vs_1v1[i] - vs_1v1[j]))
+			if sep == 0 {
+				vs_1v1[i] = 0
+				vs_1v1[j] = 0
+			} else {
+				if sep < min {
+					min = sep
+				}
+			}
+		}
+	}
+
+	zaplog.Debug("-----e------")
 }
