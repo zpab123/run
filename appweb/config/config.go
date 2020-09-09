@@ -4,22 +4,16 @@
 package config
 
 import (
-	"os"
-	"path/filepath"
 	"strings"
 
-	"github.com/astaxie/beego/config" // 配置文件工具库
-	"github.com/astaxie/beego/logs"   // 日志库
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 )
 
 // /////////////////////////////////////////////////////////////////////////////
 // 包初始化
 
 var (
-	mainPath      string              // 程序启动目录
-	iniFilePath   = "/conf/conf.conf" // conf.conf 默认路径
-	iniAbsPath    string              // conf.conf 绝对路径
-	Iniconf       config.Configer     // conf.conf 配置文件
 	WhiteCountry  = make([]string, 0) // 国家白名单
 	WhiteTimeutc  = make([]string, 0) // 时区白名单
 	WhiteLanguage = make([]string, 0) // 语言白名单
@@ -27,19 +21,13 @@ var (
 
 // 初始化
 func init() {
-	// 获取路径
-	mainPath = getMainPath()
 
-	// 绝对路径
-	iniAbsPath = filepath.Join(mainPath, iniFilePath)
-
-	// 读取 conf.conf 配置
-	readConfIni()
-
-	// 初始化名单信息
-	setWhiteCountry()
-	setWhiteLanguage()
-	setWhiteTimeUtc()
+	// 读取国家白名单
+	readWhiteCountry()
+	// 读取时区白名单
+	readWhiteTimeUtc()
+	// 读取语言白名单
+	readWhiteLanguage()
 }
 
 // /////////////////////////////////////////////////////////////////////////////
@@ -65,73 +53,57 @@ type BlackConf struct {
 // /////////////////////////////////////////////////////////////////////////////
 // private api
 
-// 读取配置文件
-func readConfIni() {
-	var err error // 错误变量
-	Iniconf, err = config.NewConfig("ini", iniAbsPath)
-	if err != nil {
-		logs.Error("conf.conf 配置文件读取错误。err=", err)
-	}
-}
-
-// 获取 当前 main 程序运行的绝对路径 例如：E:\code\go\go-project\src\test
-func getMainPath() string {
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		logs.Error("获取 main 程序 绝对路径失败")
-		return ""
-	}
-	//strings.Replace(dir, "\\", "/", -1)
-	return dir
-}
-
-// 设置国家白名单
-func setWhiteCountry() {
-	// 获取字符串
-	countryString := Iniconf.String("white::country")
-	if "" == countryString {
+// 读取国家白名单
+func readWhiteCountry() {
+	c := beego.AppConfig.String("white::country")
+	if "" == c {
+		logs.Error("读取国家白名单出错")
 		return
 	}
 
 	// 分割字符串
-	WhiteCountry = strings.Split(countryString, ",")
+	WhiteCountry = strings.Split(c, ",")
 
 	// 打印信息
+	logs.Info("国家白名单如下：")
 	for _, coun := range WhiteCountry {
-		logs.Debug(coun)
+		logs.Info(coun)
 	}
 }
 
-// 设置时区白名单
-func setWhiteTimeUtc() {
+// 读取时区白名单
+func readWhiteTimeUtc() {
 	// 获取字符串
-	timeString := Iniconf.String("white::timeutc")
-	if "" == timeString {
+	ts := beego.AppConfig.String("white::timeutc")
+	if "" == ts {
+		logs.Error("读取时区白名单出错")
 		return
 	}
 
 	// 分割字符串
-	WhiteTimeutc = strings.Split(timeString, ",")
+	WhiteTimeutc = strings.Split(ts, ",")
 
 	// 打印信息
+	logs.Info("时区白名单如下：")
 	for _, utc := range WhiteTimeutc {
-		logs.Debug(utc)
+		logs.Info(utc)
 	}
 }
 
 // 设置语言白名单
-func setWhiteLanguage() {
-	// 获取字符串
-	language := Iniconf.String("white::language")
-	if "" == language {
+func readWhiteLanguage() {
+	ln := beego.AppConfig.String("white::language")
+	if "" == ln {
+		logs.Error("设置语言白名单出错")
 		return
 	}
 
 	// 分割字符串
-	WhiteLanguage = strings.Split(language, ",")
+	WhiteLanguage = strings.Split(ln, ",")
 
 	// 打印信息
+	logs.Info("语言白名单如下：")
 	for _, language := range WhiteLanguage {
-		logs.Debug(language)
+		logs.Info(language)
 	}
 }

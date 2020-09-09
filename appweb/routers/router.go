@@ -18,6 +18,6 @@ func init() {
 	}))
 
 	beego.Router("/", &controllers.MainController{})
-	beego.Router("/appurl", &controllers.AppUrl{})
+	beego.Router("/UUL", &controllers.AppUrl{})
 	beego.Router("/login", &controllers.Login{})
 }

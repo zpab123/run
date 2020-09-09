@@ -9,7 +9,7 @@ type MainController struct {
 }
 
 func (this *MainController) Get() {
-	this.Ctx.WriteString("you are sb")
+	this.Ctx.WriteString("hello")
 	//c.Data["Website"] = "beego.me"
 	//c.Data["Email"] = "astaxie@gmail.com"
 	//c.TplName = "index.tpl"
