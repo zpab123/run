@@ -1,8 +1,8 @@
 package main
 
 import (
-	_ "run/appweb/config"
-	_ "run/appweb/routers"
+	_ "appweb/config"
+	_ "appweb/routers"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs" // 日志库

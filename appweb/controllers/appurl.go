@@ -1,8 +1,8 @@
 package controllers
 
 import (
+	"appweb/config"
 	"fmt"
-	"run/appweb/config"
 
 	"github.com/astaxie/beego"      //  引擎
 	"github.com/astaxie/beego/logs" // 日志库

@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"run/appweb/controllers"
+	"appweb/controllers"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/plugins/cors"
