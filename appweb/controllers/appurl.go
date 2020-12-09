@@ -1,8 +1,8 @@
 package controllers
 
 import (
+	"appweb/config"
 	"fmt"
-	"run/appweb/config"
 
 	"github.com/astaxie/beego"      //  引擎
 	"github.com/astaxie/beego/logs" // 日志库
@@ -19,44 +19,32 @@ type AppUrl struct {
 
 // get 方法
 func (this *AppUrl) Get() {
-	// 获取 get 参数
-	this.getOpts()
-
-	// 返回数据
-	this.reply()
-}
-
-// 获取 get 参数
-func (this *AppUrl) getOpts() {
-	this.appName = this.GetString("appName")   // app 名字
-	this.country = this.GetString("country")   // 国家
-	this.language = this.GetString("language") // 语言
-	this.timeutc = this.GetString("timeutc")   // 时区
+	appName := this.GetString("aN")    // app 名字
+	country := this.GetString("count") // 国家
+	language := this.GetString("lan")  // 语言
+	timeutc := this.GetString("tu")    // 时区
 
 	logs.Info("------------------------------------------------------------------")
 	logs.Info("ip=", this.Ctx.Request.RemoteAddr)
-	logs.Info("appName=", this.appName)
-	logs.Info("country=", this.country)
-	logs.Info("timeutc=", this.timeutc)
-	logs.Info("language=", this.language)
+	logs.Info("appName=", appName)
+	logs.Info("country=", country)
+	logs.Info("timeutc=", timeutc)
+	logs.Info("language=", language)
 	logs.Info("------------------------------------------------------------------")
-}
 
-// 返回消息
-func (this *AppUrl) reply() {
 	// 名字不存在
-	if "" == this.appName {
+	if "" == appName {
 		this.Ctx.WriteString("0")
 		return
 	}
 
 	// 参数检查
-	coun := this.CheckCountry()
-	utc := this.CheckTimeUtc()
-	language := this.CheckLanguage()
+	coun := this.CheckCountry(country)
+	utc := this.CheckTimeUtc(timeutc)
+	lan := this.CheckLanguage(language)
 
-	if coun && utc && language {
-		webUrl := this.getAppWeb()
+	if coun && utc && lan {
+		webUrl := this.getAppWeb(appName)
 		if "" == webUrl {
 			this.Ctx.WriteString("0")
 		} else {
@@ -65,16 +53,17 @@ func (this *AppUrl) reply() {
 	} else {
 		this.Ctx.WriteString("0")
 	}
+
 }
 
 // 检查国家
-func (this *AppUrl) CheckCountry() bool {
+func (this *AppUrl) CheckCountry(country string) bool {
 	if 0 == len(config.WhiteCountry) {
 		return false
 	}
 
 	for _, coun := range config.WhiteCountry {
-		if coun == this.country {
+		if coun == country {
 			return true
 		}
 	}
@@ -83,13 +72,13 @@ func (this *AppUrl) CheckCountry() bool {
 }
 
 // 检查时区
-func (this *AppUrl) CheckTimeUtc() bool {
+func (this *AppUrl) CheckTimeUtc(tuc string) bool {
 	if 0 == len(config.WhiteTimeutc) {
 		return false
 	}
 
 	for _, utc := range config.WhiteTimeutc {
-		if utc == this.timeutc {
+		if utc == tuc {
 			return true
 		}
 	}
@@ -98,13 +87,13 @@ func (this *AppUrl) CheckTimeUtc() bool {
 }
 
 // 检查语言
-func (this *AppUrl) CheckLanguage() bool {
+func (this *AppUrl) CheckLanguage(lan string) bool {
 	if 0 == len(config.WhiteLanguage) {
 		return false
 	}
 
 	for _, language := range config.WhiteLanguage {
-		if language == this.language {
+		if language == lan {
 			return true
 		}
 	}
@@ -113,12 +102,12 @@ func (this *AppUrl) CheckLanguage() bool {
 }
 
 // 获取web
-func (this *AppUrl) getAppWeb() string {
+func (this *AppUrl) getAppWeb(name string) string {
 	// 索引key
-	key := fmt.Sprintf("appWeb::%s", this.appName)
+	key := fmt.Sprintf("appWeb::%s", name)
 
 	// 参数
-	webUrl := config.Iniconf.String(key)
+	webUrl := beego.AppConfig.String(key)
 
 	return webUrl
 }

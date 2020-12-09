@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"run/appweb/controllers"
+	"appweb/controllers"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/plugins/cors"
@@ -18,6 +18,6 @@ func init() {
 	}))
 
 	beego.Router("/", &controllers.MainController{})
-	beego.Router("/appurl", &controllers.AppUrl{})
+	beego.Router("/UUL", &controllers.AppUrl{})
 	beego.Router("/login", &controllers.Login{})
 }
