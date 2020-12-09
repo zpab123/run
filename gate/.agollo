@@ -1,0 +1,1 @@
+{"application":{"Frontend.TcpAddr":"192.168.1.88:6000","Frontend.WsAddr":"192.168.1.88:6001","RpcServer.Laddr":"192.168.1.88:8000"},"ruixue.bomb":{"discovery.endpoints":"192.168.1.69:2379|192.168.1.69:2479|192.168.1.69:2579","mid.gate":"100","mid.match_1v1":"300"}}

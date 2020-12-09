@@ -78,7 +78,7 @@ func setMid() {
 		os.Exit(1)
 	}
 
-	sco.GetApp().Options.Mid = uint16(mid)
+	sco.GetApp().Options.ServiceId = uint16(mid)
 }
 
 // 设置前端
